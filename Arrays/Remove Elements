@@ -1,0 +1,35 @@
+Problem Statement
+https://leetcode.com/problems/remove-element/
+Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
+
+Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
+
+Change the array nums such that the first k elements of nums contain the elements which are not equal to val. The remaining elements of nums are not important as well as the size of nums.
+Return k.
+
+Solutions
+
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int l = nums.length;
+        int i=0;
+        int j = 0;
+        while(i<l)
+        {
+            if(nums[i] != val)
+            {
+                nums[j++] = nums[i];
+            }
+            i++;
+        }
+        return j;
+    }
+}
+
+Algorithm
+1. Find length of the array
+2. Take 2 pointers as i and j & initialise it to 0.
+3. Run a loop till i<l
+4. Check if value at i is != value to be removed, if it is then put the value at j index of nums array and increace the value of j.
+5. Increase value of i.
+6. return j.
