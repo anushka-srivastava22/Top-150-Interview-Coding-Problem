@@ -1,0 +1,36 @@
+Problem Statement
+https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/
+Given an integer array nums sorted in non-decreasing order, remove some duplicates in-place such that each unique element appears at most twice. The relative order of the elements should be kept the same.
+
+Since it is impossible to change the length of the array in some languages, you must instead have the result be placed in the first part of the array nums. More formally, if there are k elements after removing the duplicates, then the first k elements of nums should hold the final result. It does not matter what you leave beyond the first k elements.
+
+Return k after placing the final result in the first k slots of nums.
+
+Do not allocate extra space for another array. You must do this by modifying the input array in-place with O(1) extra memory.
+
+Solution
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        if(nums.length<3)
+        {
+            return nums.length;
+        }
+        int index=2;
+        for(int i=2;i<nums.length;i++)
+        {
+            if(nums[i]!=nums[index-2])
+            {
+                nums[index++] = nums[i];
+            }
+        }
+        return index;
+    }
+}
+
+Algorithm
+1. Check if length of array is less than 3 then return its length.
+2. Initialize index as 2.
+3. Run for loop from i=2 till its length.
+4. Check if value at i = 2 is not equal to index-2 then assign the value at i to value at index and increase its index.
+5. Return value at index.
