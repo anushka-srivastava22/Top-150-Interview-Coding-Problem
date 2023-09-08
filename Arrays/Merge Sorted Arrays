@@ -26,3 +26,10 @@ class Solution {
         
     }
 }
+
+Algorithm
+1. Assign the length of nums1 & nums 2 to i & j.
+2. Assign the combine length to k.
+3. Run the while loop till k>=0.
+4. Check if j<0 or the value at i is greater or equal to 0 and value at i of nums1 > value at j of nums2, is its true then assign the value of nums1 at i to num1 
+at k and decrease the value of i & k otherwise assign the value of nums1 at j to num1 at k and decrease value of j & k.
