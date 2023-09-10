@@ -1,0 +1,35 @@
+Problem Statement
+https://leetcode.com/problems/length-of-last-word/
+Given a string s consisting of words and spaces, return the length of the last word in the string.
+
+A word is a maximal substring consisting of non-space characters only.
+
+Solution
+
+class Solution {
+    public int lengthOfLastWord(String s) {
+        int count=0;
+        for(int i=s.length()-1;i>=0;i--)
+        {
+            
+            if(s.charAt(i)==' ')
+            {
+                if(count>0)
+                {
+                    return count;
+                }
+            }
+            else
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+}
+
+Algorithm
+1. Assign count as 0.
+2. Run for loop from length of array till 0.
+3. Check if character at i index is equal to space, if its true then check if count is greater than 0, if its true then return count otherwise else increase the value of count.
+4. Return value of count.
