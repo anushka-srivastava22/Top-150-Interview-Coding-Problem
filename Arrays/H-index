@@ -1,0 +1,28 @@
+Problem Statement
+https://leetcode.com/problems/h-index/
+Given an array of integers citations where citations[i] is the number of citations a researcher received for their ith paper, return the researcher's h-index.
+
+According to the definition of h-index on Wikipedia: The h-index is defined as the maximum value of h such that the given researcher has published at least h papers that have each been cited at least h times.
+
+Solution
+class Solution {
+    public int hIndex(int[] citations) {
+        Arrays.sort(citations);
+        int n = citations.length;
+   
+        int idx = 0 ;
+
+        while(idx < n &&  n-idx >citations[idx]){
+            idx++;
+        }
+
+        return n-idx;
+    }
+}
+
+Algorithm 
+1. Sort the array.
+2. Find the length of array.
+3. Run while loop till index < n and n-index > value at index of citation array.
+4. Increase the index.
+5. Return n-index.
