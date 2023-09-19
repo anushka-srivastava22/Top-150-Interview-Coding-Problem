@@ -1,0 +1,43 @@
+Problem Statement
+https://leetcode.com/problems/trapping-rain-water/
+
+Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
+
+Solution
+class Solution {
+    public int trap(int[] height) {
+        int n=height.length;
+        int l[]=new int[n];
+        int r[]=new int[n];
+        l[0] = height[0];
+        for(int i=1;i<n;i++)
+        {
+            l[i] = Math.max(l[i-1],height[i]);
+        }
+        r[n-1]=height[n-1];
+        for(int i=n-2;i>=0;i--)
+        {
+            r[i] = Math.max(r[i+1],height[i]);
+        }
+        int res=0;
+        for(int i=0;i<n;i++)
+        {
+            res+= (Math.min(l[i],r[i])-height[i]);
+        }
+        return res;
+    }
+}
+
+Algorithm
+
+1. Find the length of height array.
+2. Create l and r array.
+3. Assign l[0] = height[0].
+4. Run for loop from i=1 till n.
+5. Store the maximum value among the value of l array at i-1 index and value of height array at i index in l[i].
+6. Assign  r[n-1]=height[n-1].
+7. Run for loop from i=n-2 till 0.
+8. Store the maximum value among the value of r array at i+1 index and value of height array at i index in r[i].
+9. Store res=0.
+10. Run for loop from i=0 till n.
+11. Add the difference between the minimum value among l[i] and r[i] and value at height[i]. 
