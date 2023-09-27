@@ -1,0 +1,54 @@
+Problem Statement
+
+https://leetcode.com/problems/reverse-words-in-a-string/
+Given an input string s, reverse the order of the words.
+
+A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space.
+
+Return a string of the words in reverse order concatenated by a single space.
+
+Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.
+
+
+Solution
+
+class Solution {
+    public String reverseWords(String s) {
+        StringBuilder res=new StringBuilder();
+        int count=0, last=0, start=0;
+        for(int i=s.length()-1;i>=0;i--)
+        {
+            if(s.charAt(i)!=' ')
+            {
+                last=i;
+                while(i>0 && s.charAt(i-1)!=' ')
+                {
+                    i--;
+                }
+                start=i;
+                if(count>0)
+                {
+                    res.append(" ");
+                }
+                res.append(s.substring(start,last+1));
+                count++;
+            }
+            
+
+        }
+        return res.toString();
+    }
+}
+
+
+Algorithm
+1. Create a string builder of res.
+2. Assign count=0, last=0, start=0.
+3. Run for loop from length of the string till 0.
+4.Check if character of s at i index is not equal to space.
+5. Then assign last = i;
+6. Run while loop till the condition i>0 and character at i-1 is not equal to space is true and decrease i by 1.
+7. Assign start = i.
+8. Check if count>0 the append space in res.
+9. Assign the substring from start till last + 1 in res and increase count.
+10. Return string value of res.
