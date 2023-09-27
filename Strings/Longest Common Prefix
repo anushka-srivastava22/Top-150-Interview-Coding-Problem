@@ -1,0 +1,58 @@
+Problem Statement
+https://leetcode.com/problems/longest-common-prefix/
+Write a function to find the longest common prefix string amongst an array of strings.
+
+If there is no common prefix, return an empty string "".
+
+Solution
+
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if(strs.length==0)
+        {
+            return "";
+        }
+        else if(strs.length == 1)
+        {
+            return strs[0];
+        }
+        int index = 0;
+        boolean found = true;
+        while(true)
+        {
+            for(int j=1;j<strs.length;j++)
+            {
+                if(strs[j].length() <= index || strs[j-1].length() <= index || strs[j].charAt(index) != strs[j-1].charAt(index))
+                {
+                    found = false;
+                    break;
+                }      
+                
+                
+            }
+            if(found==true)
+            {
+                index++;
+            }
+            else 
+            {
+                break;
+            }
+        }
+        return strs[0].substring(0,index);
+    }
+}
+
+
+Algorithm
+
+1. Check if the length of array is 0 then return 0.
+2. Check if the length of array is 1 then return value at 1st index of array.
+3. Assign found=true and index=0.
+4. Run while(true).
+5. Run for loop from 1 till length of string.
+6. Check the length of value at j is less than or equal to index or the value at j-1 is less than or equal 
+to index or character of the value at j index of strs array is not equal to character of  the value at j-1 index, 
+then assign found=false and break the loop.
+7. Check if the value of found is equal to true then increase the index by 1 else break.
+8. Return the substring from 0 to 1 of the value at 0 index of strs array.
