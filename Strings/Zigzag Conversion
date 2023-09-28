@@ -1,0 +1,56 @@
+Problem Statement
+https://leetcode.com/problems/zigzag-conversion/
+The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
+
+P   A   H   N
+A P L S I I G
+Y   I   R
+And then read line by line: "PAHNAPLSIIGYIR"
+
+Write the code that will take a string and make this conversion given a number of rows.
+
+Solution
+
+class Solution {
+    public String convert(String s, int numRows) {
+        if(numRows==1)
+        {
+            return s;
+        }
+        List<StringBuilder> rows=new ArrayList<>();
+        for(int i=0;i<Math.min(numRows,s.length());i++)
+        {
+            rows.add(new StringBuilder());
+        }
+        boolean goingdown=false;
+        int curRow = 0;
+        for(char ch : s.toCharArray())
+        {
+            rows.get(curRow).append(ch);
+            if(curRow == 0 || curRow == numRows-1)
+            {
+                goingdown = !goingdown;
+            }
+            curRow += goingdown? 1:-1;
+        }
+        StringBuilder res=new StringBuilder();
+        for(StringBuilder row:rows)
+        {
+            res.append(row);
+        }
+        return res.toString();
+    }
+}
+
+Algorithm
+1. Check if numRow is equal to 1 then return s.
+2. Create a Array List of StringBuilder as rows.
+3. Run for loop from 0 to min value among numrows and length of string and create a stringbuilder memory in rows.
+4. Declare goingdown as false and currow=0.
+5. Run for loop for each character of s.
+6. Append the value of ch at currow position in rows.
+7. Check if curRow == 0 or curRow == numRows-1 then assign goingdown = !goingdown.
+8. Assign curRow += goingdown? 1:-1.
+9. Create res of stringbuilder type.
+10. Run for loop for rows and append the value of row in res.
+11. Return the string value of res.
