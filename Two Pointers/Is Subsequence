@@ -1,0 +1,39 @@
+Problem Statement
+https://leetcode.com/problems/is-subsequence/
+Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+
+A subsequence of a string is a new string that is formed from the original string by deleting 
+some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+
+Solution
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        if(s.length()==0)
+        {
+            return true;
+        }
+        int i=0,j=0;
+        while(i<s.length() && j<t.length())
+        {
+            if(s.charAt(i) == t.charAt(j))
+            {
+                i++;
+            }
+            j++;
+        }
+        if(i==s.length())
+        {
+            return true;
+        }
+        return false;
+    }
+}
+
+Algorithm
+1. Check if length of s is 0 then return true.
+2. Assign i=0,j=0.
+3. Run while loop i is less than length of s and j  is less than length of t.
+4. Check if character of s at i position is equal to character of t at j position then increase i.
+5. Increase value of j.
+6. Check if i is equal to length of s then return true.
+7. Return false.
