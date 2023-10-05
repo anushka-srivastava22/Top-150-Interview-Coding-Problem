@@ -1,0 +1,69 @@
+Problem Statement
+https://leetcode.com/problems/3sum/
+Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+
+Notice that the solution set must not contain duplicate triplets.
+
+Solution
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        ArrayList<List<Integer>> res = new ArrayList<>();
+        for(int i=0;i<nums.length;i++)
+        {
+            int j=i+1;
+            int k=nums.length-1;
+            if(i>0 && nums[i]==nums[i-1])
+            {
+                
+                continue;
+
+            }
+            while(j<k)
+            {
+                if(k<nums.length-1 && nums[k] == nums[k+1])
+                {
+                    k--;
+                    continue;
+                }
+                if(nums[i]+nums[j]+nums[k]>0)
+                {
+                    k--;
+                }
+                else if(nums[i]+nums[j]+nums[k]<0)
+                {
+                    j++;
+                }
+                else 
+                {
+                    ArrayList<Integer> l=new ArrayList<>();
+                    l.add(nums[i]);
+                    l.add(nums[j]);
+                    l.add(nums[k]);
+                    res.add(l);
+                    j++;
+                    k--;
+                }
+            }
+
+        }
+        return res;
+    }
+}
+
+Algorithm 
+
+1. Sort the nums array.
+2. Create an array list of array list of integers of res.
+3. Run for loop from 0 to length.
+4. Assign j=i+1 and k= length of array.
+5. Check if i>0 and value at i and i-1 are equal then continue.
+6. Run while loop till j<k.
+7. Check if k is less than length-1 and values at k and k+1 are equal then decrease value of k and continue.
+8. Check if sum of the values at i,j,k position of nums array is > 0 then decrease k.
+9. Check if sum of the values at i,j,k position of nums array is < 0 then increase j.
+10. Otherwise craete array list of l and add values of nums at i,j,k position.
+11. Add l in res arraylist.
+12. Increase j and decrease k.
+13. Return res.
