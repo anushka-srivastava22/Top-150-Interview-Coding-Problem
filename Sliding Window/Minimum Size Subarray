@@ -1,0 +1,35 @@
+Problem Statement
+https://leetcode.com/problems/minimum-size-subarray-sum/
+Given an array of positive integers nums and a positive integer target, return the minimal length of a 
+subarray whose sum is greater than or equal to target. If there is no such subarray, return 0 instead.
+
+Solution
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        if(nums==null || nums.length == 0)
+        {
+            return 0;
+        }
+        int i=0,j=0,sum=0,min=Integer.MAX_VALUE;
+        while(j<nums.length)
+        {
+            sum += nums[j++];
+            while(sum>=target)
+            {
+                min=Math.min(min,j-i);
+                sum-=nums[i++];
+            }
+        }
+        return min == Integer.MAX_VALUE?0:min;
+    }
+}
+
+Algorithm
+1. Check if nums is null or length of nums is equal to zero, then return 0.
+2. Assign i=0,j=0,sum=0,min=Integer.MAX_VALUE.
+3. Run while loop till j is less than length of nums.
+4. Add the value of nums at j and increase j to sum.
+5. Run while loop till sum is greater than target.
+6. Assign the minimum value among min and j-i to min.
+7. Subtract the value at i of nums array to sum and increase i.
+8. Return the value as 0 if min is equal to max value of integer otherwise min.
