@@ -1,0 +1,49 @@
+Problem Statement
+https://leetcode.com/problems/valid-sudoku/
+Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+
+Each row must contain the digits 1-9 without repetition.
+Each column must contain the digits 1-9 without repetition.
+Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+
+Solution 
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        Set<String> set=new HashSet<>();
+        for(int i=0;i<=8;i++)
+        {
+            for(int j=0;j<=8;j++)
+            {
+                char n = board[i][j];
+           
+            if(n!='.')
+            {
+                if(!(set.add(n+"r"+i)) || !(set.add(n+"c"+j)) || !(set.add(n+"b"+i/3+j/3)))
+                {
+                    return false;
+                }
+            }
+            }
+        }
+        return true;
+    }
+}
+
+Algorithm 
+1. Create a HashSet of strings as set.
+2. Run nested for loop from 0 to 8.
+3. Assign the character at i and j position of board array.
+4. Check if n is not equal to '.' then check if
+!set.add(n + "r" + i): It tries to add a string to the HashSet formed by concatenating the number n, the letter 'r', and the current row i. 
+This represents a unique identifier for a number in a row. If add returns false, it means that the same identifier (number n in the same row) has already 
+been added to the HashSet, indicating a duplicate number in the same row. In this case, the Sudoku puzzle is invalid, and the function returns false.
+
+!set.add(n + "c" + j): It tries to add a string to the HashSet formed by concatenating the number n, the letter 'c', and the current column j. This represents a
+unique identifier for a number in a column. If add returns false, it means that the same identifier (number n in the same column) has already been added to the HashSet, 
+indicating a duplicate number in the same column. In this case, the Sudoku puzzle is invalid, and the function returns false.
+
+!set.add(n + "b" + i / 3 + j / 3): It tries to add a string to the HashSet formed by concatenating the number n, the letter 'b', and the box identifier i / 3 + j / 3. 
+The box identifier is calculated based on the current row and column divided by 3, which determines which 3x3 subgrid (box) the number belongs to. If add returns false, 
+it means that the same identifier (number n in the same box) has already been added to the HashSet, indicating a duplicate number in the same box. In this case, the Sudoku 
+puzzle is invalid, and the function returns false.
+5. Return true.
