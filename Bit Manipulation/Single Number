@@ -1,0 +1,22 @@
+Problem Statement
+https://leetcode.com/problems/single-number/
+Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+
+You must implement a solution with a linear runtime complexity and use only constant extra space.
+
+Solution
+class Solution {
+    public int singleNumber(int[] nums) {
+        int ans=0; //since XOR with 0 returns same number 
+        for(int i=0; i<nums.length; i++){
+            ans ^= nums[i];  // ans = (ans) XOR (array element at i) 
+        }
+        return ans;  
+    }
+}
+
+Algorithm
+1. Assign ans=0.
+2. Run for loop from 0 till length of nums array .
+3. Assign ans ^= nums[i].
+4. Return ans.
