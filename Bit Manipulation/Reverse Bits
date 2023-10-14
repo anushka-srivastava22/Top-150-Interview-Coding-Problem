@@ -1,0 +1,42 @@
+Problem Statement
+https://leetcode.com/problems/reverse-bits/
+Reverse bits of a given 32 bits unsigned integer.
+
+Note:
+
+Note that in some languages, such as Java, there is no unsigned integer type. In this case, both input and output will be given as a signed integer type. They should not affect your implementation, as the integer's internal binary representation is the same, whether it is signed or unsigned.
+In Java, the compiler represents the signed integers using 2's complement notation. Therefore, in Example 2 above, the input represents the signed integer -3 and the output represents the signed integer -1073741825.
+
+Solution
+public class Solution {
+    // you need treat n as an unsigned value
+    public int reverseBits(int n) {
+        int rev=0;
+        for(int i=0;i<32;i++)
+        {
+            rev <<= 1;
+            rev += n&1;
+            n>>=1;
+        }
+        return rev;
+    }
+}
+
+Algorithm 
+Here's a step-by-step explanation:
+
+int rev = 0;: Initialize an integer variable rev to store the reversed integer. This variable is initially set to 0.
+
+for (int i = 0; i < 32; i++) {: Start a loop that will iterate 32 times. This loop processes each bit of the integer n, assuming a 32-bit integer.
+
+rev <<= 1;: Left-shift the rev variable by one bit. This effectively makes room for the next bit to be added to the reversed integer.
+
+rev += n & 1;: Add the least significant bit of n to the rev variable. This is done by performing a bitwise AND (&) operation between n and 1, effectively extracting the least significant bit of n, and then adding it to rev.
+
+n >>= 1;: Right-shift n by one bit. This discards the previously processed least significant bit, making the next bit the new least significant bit.
+
+The loop continues for 32 iterations, processing each bit in the same manner.
+
+Finally, after the loop has processed all 32 bits, the rev variable will contain the binary representation of n reversed.
+
+The function returns the reversed integer rev.
