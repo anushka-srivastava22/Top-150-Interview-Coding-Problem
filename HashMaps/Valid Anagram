@@ -1,0 +1,40 @@
+Problem Statement
+https://leetcode.com/problems/valid-anagram/
+Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+Solution
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length()!=t.length())
+        {
+            return false;
+        }
+        int freq[] = new int[26];
+        for(int i=0;i<s.length();i++)
+        {
+            freq[s.charAt(i) - 'a']++;
+            freq[t.charAt(i) - 'a']--;
+
+        }
+        for(int i=0;i<freq.length;i++)
+        {
+            if(freq[i]!=0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+Algorithm
+1. Check if length of s and t are not equal then return false;
+2. Create array of freq[26].
+3. Run fr loop from 0 till length of s.
+4. Increase value of the character at i of string s.
+5. Decrease value of the character at i of string t.
+6. Run for loop from 0 till length of freq.
+7. Check if value at i of freq is nt equal to 0 then return false.
+8. Return true.
