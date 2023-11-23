@@ -1,0 +1,46 @@
+Problem Statement
+https://leetcode.com/problems/happy-number/submissions/?envType=study-plan-v2&envId=top-interview-150
+Write an algorithm to determine if a number n is happy.
+
+A happy number is a number defined by the following process:
+
+Starting with any positive integer, replace the number by the sum of the squares of its digits.
+Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
+Those numbers for which this process ends in 1 are happy.
+Return true if n is a happy number, and false if not.
+
+Solution
+
+class Solution {
+    public boolean isHappy(int n) {
+         Set<Integer> seen=new HashSet<>();
+        while(n!=1 && !seen.contains(n))
+        {
+            seen.add(n);
+            int sum = 0;
+            while(n!=0)
+            {
+                
+                int digit = n%10;
+                sum+=digit*digit;
+                n/=10;
+            
+            }
+            n=sum;
+        }
+        return n==1;
+    }
+}
+
+Algorithm
+
+1. Create a set of integers as seen.
+2. Run while loop till n!=1 and seen contains the value of n.
+3. Add n in seen.
+4. Assign sum=0.
+5. Ri=un while loop till n!=0.
+6. Assign n%10 to digit.
+7. Add the multiplication of digit by itself to sum.
+8. Divide n/=10.
+9. n=sum.
+10. Return n==1;
