@@ -1,0 +1,48 @@
+Problem Statement
+https://leetcode.com/problems/group-anagrams/
+Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+Solution
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] s) {
+        List<List<String>> res=new ArrayList<>();
+        Map<String , List<String>> map = new HashMap<>();
+        for(String str: s) 
+        {
+            char chars[] = str.toCharArray();
+            Arrays.sort(chars);
+            String newStr = String.valueOf(chars);
+            if(map.get(newStr)!=null)
+            {
+                map.get(newStr).add(str);
+            }
+            else
+            {
+                List<String> strList = new ArrayList<>();
+                strList.add(str);
+                map.put(newStr,strList);
+            }
+        }
+        for(String c: map.keySet())
+        {
+            res.add(map.get(c));
+        }
+        return res;
+    }
+}
+
+Algorithm 
+
+1. Create a List of List of String as res.
+2. Create a map of String and List<String> as map.
+3. Run for loop for s array.
+4. Convert str to array and store it in chars.
+5. Sort the characters of chars array.
+6. Store the value of chars in newStr.
+7. Check if get value of map at newStr is not equal to null then  add str at get of newStr in map.
+8. Otherwise Create a arrayList of strList and add the value of str in strList then put strList at newStr in map.
+9. Run for loop for keySet of map and add it at value of c from map in res.
+10. Return res.
