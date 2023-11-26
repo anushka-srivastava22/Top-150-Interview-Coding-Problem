@@ -1,0 +1,50 @@
+Problem Statement
+https://leetcode.com/problems/longest-consecutive-sequence/
+
+Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+
+You must write an algorithm that runs in O(n) time.
+
+Solution 
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        int n=nums.length;
+        if(n<2) {
+            return n;
+        }
+        int result = 1, count = 1;
+        Arrays.sort(nums);
+        for(int i=1;i<n;i++)
+        {
+            if(i<n && nums[i] == nums[i-1] + 1)
+            {
+                count++;
+            }
+            else if(i<n && nums[i] == nums[i-1]) 
+            {
+                continue;
+            }
+            else 
+            {
+                result = Math.max(result, count);
+                count = 1;
+            }
+        }
+        result = Math.max(result,count);
+        return result;
+    }
+}
+
+Algorithm
+
+1. Find length of number.
+2. Check if n<2 return n.
+3. Assign result = 1 and count=1.
+4. Sort the array nums.
+5. Run for loop from i=1 till n.
+6. Check if i<n and value of nums at i and add 1 in nums[i-1] then increase the value of count.
+7. Then check if i<n and value of nums at i and i-1 then continue.
+8. Otherwise assign the max value among result and count in result and assign count=1.
+9. Assign the max value among result and count in result.
+10. Return result.
