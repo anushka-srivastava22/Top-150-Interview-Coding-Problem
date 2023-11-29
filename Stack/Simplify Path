@@ -1,0 +1,62 @@
+Problem Statement
+
+https://leetcode.com/problems/simplify-path/
+
+Given a string path, which is an absolute path (starting with a slash '/') to a file or directory in a Unix-style file system, convert it to the simplified canonical path.
+
+In a Unix-style file system, a period '.' refers to the current directory, a double period '..' refers to the directory up a level, and any multiple consecutive slashes (i.e. '//') are treated as a single slash '/'. For this problem, any other format of periods such as '...' are treated as file/directory names.
+
+The canonical path should have the following format:
+
+The path starts with a single slash '/'.
+Any two directories are separated by a single slash '/'.
+The path does not end with a trailing '/'.
+The path only contains the directories on the path from the root directory to the target file or directory (i.e., no period '.' or double period '..')
+Return the simplified canonical path.
+
+
+Solution
+
+class Solution {
+    public String simplifyPath(String path) {
+        String parts[]=path.split("/");
+        StringBuilder spath=new StringBuilder();
+        for(String part: parts)
+        {
+            if(part.isEmpty() || part.equals("."))
+            {
+                continue;
+            }
+            else if(part.equals(".."))
+            {
+                if(spath.length()>0)
+                {
+                    int lastindex=spath.lastIndexOf("/");
+                    spath.delete(lastindex,spath.length());
+
+                }
+            }
+            else
+            {
+                spath.append("/").append(part);
+
+            }
+        }
+        if(spath.length()==0)
+        {
+            spath.append("/");
+        }
+        return spath.toString();
+    }
+}
+
+Algorithm
+
+1. Split the path and store it in parts array.
+2. Create a string builder of spath.
+3. Run for loop for each value of parts.
+4. Check if part is empty or contains '.' then continue.
+5. Then check if part contains '..' and length of spath is greater than 0 then find the last index of '/' into lastindex and delete the value of spath of lastindexand spath.length.
+6. Otherwise append the spath by / and part.
+7. At last check if length of spath is 0 then append / in spath.
+8. Return the string value of spath.
