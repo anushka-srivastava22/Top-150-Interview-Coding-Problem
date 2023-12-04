@@ -1,0 +1,46 @@
+Problem Statement
+https://leetcode.com/problems/add-two-numbers/
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Solution
+
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head = new ListNode(0);
+        ListNode curr = head;
+        int carry = 0;
+        while(l1 != null || l2 != null || carry != 0)
+        {
+            int x = (l1 != null)?l1.val:0;
+            int y = (l2 != null)?l2.val:0;
+            int sum = carry + x + y;
+            carry = sum/10;
+            curr.next = new ListNode(sum%10);
+            curr = curr.next;
+            if(l1!=null)
+            {
+                l1 = l1.next;
+            }
+            if(l2!=null)
+            {
+                l2=l2.next;
+            }
+
+        }
+        return head.next;
+    }
+}           
+
+Algorithm
+
+1. Create a list node head with value 0 and assign head to curr and 0 to carry.
+2. Run while loop till value of l1 is not equal to null or value of l2 is not equal to null or value of carry is not equal to 0.
+3. Assign the value of x & y as  x = (l1 != null)?l1.val:0 & y = (l2 != null)?l2.val:0.
+4. Store the sum of carry, y, x in sum.
+5. Assign sum/10 to carry.
+6. Assign sum%10 to curr.next.
+7. And do curr = curr.next which mean shift to new value.
+8. Check if l1 is not equal to null then l1 is equal to l1.next and then check if l2 is not equal to null then l2 is equal to l2.next.
+9. Return head.next.
