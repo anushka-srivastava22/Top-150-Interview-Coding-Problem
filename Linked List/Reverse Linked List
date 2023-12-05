@@ -1,0 +1,49 @@
+Problem Statement
+
+https://leetcode.com/problems/reverse-linked-list-ii/
+
+Given the head of a singly linked list and two integers left and right where left <= right, reverse the nodes 
+of the list from position left to position right, and return the reversed list.
+
+
+Solution
+
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if(head == null || left == right)
+        {
+            return head;
+        }
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode prev = dummy;
+        for(int i=0;i<left-1;i++)
+        {
+            prev=prev.next;
+        }
+        ListNode curr = prev.next;
+        for(int i=0; i<right-left;i++)
+        {
+            ListNode nextNode = curr.next;
+            curr.next = nextNode.next;
+            nextNode.next = prev.next;
+            prev.next = nextNode;
+        }
+        return dummy.next;
+    }
+}
+
+
+Algorithm 
+
+1. Check if head is equal to null or left is equal to right then return head.
+2. Assign the node as 0 to dummy.
+3. Assign the head to dummy.next and dummy to prev.
+4. Run for loop from 0 till left-1 then assign the value of next address of prev to prev.
+5. Assign the value of next address of prev to curr.
+6. Run for loop from i=0 till subtracyed value of right and left.
+7. Assign the value of next address of nxtNode.
+8. Assign the value of of next address of nextNode to next address of curr.
+9. Assign the value of next address of prev to next address to newNode.
+10. Assign the value of nextNode to next address of prev.
+11. Return dummy.next.
