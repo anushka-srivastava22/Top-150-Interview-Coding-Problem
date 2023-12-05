@@ -1,0 +1,39 @@
+Problem Statement
+
+https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+Given the head of a linked list, remove the nth node from the end of the list and return its head.
+
+
+Solution
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode slow = head, fast=head;
+        for(int i=0;i<n;i++)
+        {
+            fast=fast.next;
+        }
+        if(fast == null)
+        {
+            return head.next;
+        }
+        while(fast.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next;
+        }
+        slow.next = slow.next.next;
+        return head;
+    }
+}
+
+
+Algorithm
+
+1. Assign value of head to fast and slow.
+2. Run for loop from i=0 till n then assign the value of next address of fast to fast.
+3. Check is fast == null then return value of next address of head.
+4. Run while loop till value of next address of fast is not equal to null.
+5. Assign value of next address of slow to slow and value of next address of fast to fast.
+6. Assign slow.next = slow.next.next.
+7. Return head.
