@@ -1,0 +1,42 @@
+Problem Statement
+https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
+
+Given the head of a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well.
+
+
+Solution
+
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode res = new ListNode(0, head);
+        ListNode temp = res;
+        while(head!=null)
+        {
+            if(head.next!=null && head.val == head.next.val)
+            {
+                while(head.next != null && head.val == head.next.val)
+                {
+                    head = head.next;
+                }
+                temp.next = head.next;
+            }
+            else 
+            {
+                temp = temp.next;
+            }
+            head = head.next;
+        }
+        return res.next;
+    }
+}
+
+
+Algorithm 
+
+1. Create a listnode of res with 0, head and assign res to temp.
+2. Run while loop till head is not equal to null.
+3. Then check if value at next address of head is not equal to null and value of head is equal to value of at next address of head then
+run while loop till value at next address of head is not equal to null and value of head is equal to value at next address of head 
+then assign value at next address of head to head otherwise assign value at next address of teml to temp.
+4. Assign value at next address of head to head.
+5. Return the value of next address of res.
