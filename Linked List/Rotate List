@@ -1,0 +1,51 @@
+Problem Statement
+https://leetcode.com/problems/rotate-list/
+Given the head of a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well.
+
+Solution
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head == null || head.next == null || k==0)
+        {
+            return head;
+        }
+        ListNode curr = head;
+        int len = 1;
+        while(curr.next != null)
+        {
+            len++;
+            curr=curr.next;
+        }
+        curr.next = head;
+        k = k%len;
+        k = len - k;
+        while(k!=0)
+        {
+            curr=curr.next;
+            k--;
+        }
+        head = curr.next;
+        curr.next = null;
+        return head;
+    }
+}
+
+Algorithm
+
+1. Check if head is null or next value of head is equal to null or k is equal to 0, then return head.
+2. Assign head to curr and 1 to len. 
+3. Run while loop till value of next address of curr is not equal to null, then increase len and assign curr.next to curr.
+4. Assign head to curr.next, k%len to k and len-k to k.
+5. Run while loop till k!=0 then assign curr.next to curr and decrease k.
+6. Assign curr.next to head, null to curr.next and then return head.
