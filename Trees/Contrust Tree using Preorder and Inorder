@@ -1,0 +1,65 @@
+Problem Statement
+
+https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the 
+inorder traversal of the same tree, construct and return the binary tree.
+
+
+Solution
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int preorderIndex;
+    Map<Integer,Integer> inorderIndexMap;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        
+        preorderIndex = 0;
+        inorderIndexMap = new HashMap<>();
+        for(int i=0;i<inorder.length;i++)
+        {
+            inorderIndexMap.put(inorder[i],i);
+        }
+        return arrayToTree(preorder,0,preorder.length-1);
+       
+    }
+     public TreeNode arrayToTree(int[] preorder, int left, int right)
+        {
+            if(left > right)
+            {
+                return null;
+            }
+            int rootValue = preorder[preorderIndex++];
+            TreeNode root = new TreeNode(rootValue);
+            root.left = arrayToTree(preorder,left,inorderIndexMap.get(rootValue)-1);
+            root.right = arrayToTree(preorder, inorderIndexMap.get(rootValue)+1,right);
+            return root;
+        }
+}
+
+
+Algorithm 
+
+1. Create preorderIndex of int type and inorderIndexMap of Map with Integer, Integer.
+2. Assign 0 to preorderIndex and new HashMap to inorderIndexMap.
+3. Run for loop from i=0 till length of inorder and put iorder[i] at i index on inorderIndexMap.
+4. Return arrayToTree(preorder, 0, length of preorder -1).
+5. Create a fuction of arrayToTree and Check if value of left is greater than right then return null.
+6. Assign the value of preorder at preorderIndex position to rootValue and increase the position value.
+7. Create a new TreeNode of rootValue to root.
+8. Assign arrayToTree(preorder,left,inorderIndexMap.get(rootValue)-1) to root.left.
+9. Assign arrayToTree(preorder, inorderIndexMap.get(rootValue)+1,right) to root.right.
+10. Return root.
