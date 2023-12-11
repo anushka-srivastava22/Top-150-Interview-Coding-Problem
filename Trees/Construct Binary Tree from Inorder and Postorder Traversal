@@ -1,0 +1,51 @@
+Problem Statement
+
+https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
+Given two integer arrays inorder and postorder where inorder is the inorder traversal of a binary tree and postorder is the postorder traversal 
+of the same tree, construct and return the binary tree.
+
+Solution
+
+class Solution {
+    static int index;
+
+    public static TreeNode buildTree(int[] inorder, int[] postorder, int start, int end, Map<Integer, Integer> map) {
+        if (start > end)
+            return null;
+        int curr = postorder[index--];
+        TreeNode node = new TreeNode(curr);
+        if (start == end)
+            return node;
+
+        int inIndex = map.get(curr);
+        TreeNode right = buildTree(inorder, postorder, inIndex + 1, end, map);
+        TreeNode left = buildTree(inorder, postorder, start, inIndex - 1, map);
+        node.left = left;
+        node.right = right;
+        return node;
+    }
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        Map<Integer, Integer> map = new HashMap<>();
+        index = 0;
+        for (int i = 0; i < inorder.length; i++)
+            map.put(inorder[i], i);
+        index = postorder.length - 1;
+        return buildTree(inorder, postorder, 0, postorder.length - 1, map);
+    }
+
+}
+
+Algorithm
+
+1. Assign static value 0 to index.
+2. Contruct a function of buildTree(int[] inorder, int[] postorder, int start, int end, Map<Integer, Integer> map).
+3. Check if start is greater than end then return null.
+4. Assign the value of postorder at index-- to curr and create a treenode curr to node.
+5. Check if start is equal to end then return node.
+6. Get the value of curr from map and store it in inIndex.
+7. Assign TreeNode right = buildTree(inorder, postorder, inIndex + 1, end, map) and TreeNode left = buildTree(inorder, postorder, start, inIndex - 1, map).
+8. Assign left to node.left and right to node.right and then return node.
+9. Create a hash map of int, int as map and Assign 0 to index.
+10. Run for loop from i=0 till length of inorder and put value of inorder at position i to i index.
+11. Assign the length of postorder-1 to index.
+12. Return buildTree(inorder, postorder, 0, postorder.length - 1, map).
