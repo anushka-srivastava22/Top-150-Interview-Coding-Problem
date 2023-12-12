@@ -1,0 +1,68 @@
+Problem Statement
+
+https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/
+Given a binary tree
+
+struct Node {
+  int val;
+  Node *left;
+  Node *right;
+  Node *next;
+}
+Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
+
+Initially, all next pointers are set to NULL.
+
+
+Solution 
+
+class Solution {
+    public Node connect(Node root) {
+        if (root == null) {
+            return null;
+        }
+        bfs(root);
+        return root;
+    }
+
+    private void bfs(Node root) {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+
+            Node previousRight = null;
+            for (int i = 0; i < size; i++) {
+                Node node = queue.poll();
+                
+                node.next = previousRight;
+                previousRight = node;
+                
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+            }
+            previousRight = null;
+        }
+    }
+}
+
+Algorithm 
+
+1. Check if root is null then return null.
+2. Call the function bfs(root) and return root.
+3. Create a  Linked List of queue of Node type and add root to queue.
+4. Run while loop till queue is not empty.
+5. Store the size of queue in size.
+6. Assign previosRight as null.
+7. Run for loop from i=0 till size.
+8. Poll the value of queue in node.
+9. Assign the value of previousRight to node.next.
+10. Assign the value of node to previousRight.
+11. Check if node is not null then add root.right to queue.
+12. Then check if node.left is not null then add node.left to queue.
+13. Assign previousRight as null.
