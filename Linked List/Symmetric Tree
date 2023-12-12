@@ -31,3 +31,14 @@ class Solution {
         return helper(r1.left,r2.right) && helper(r1.right,r2.left);
     }
 }
+
+
+Algorithm
+
+1. Check if root is null then return true.
+2. Then return helper(root.left,root.right).
+3. Create a function with return type boolean and argument as r1,r2 with TreeNode as datatype.
+4. Check if r1 is null and r2 is null then return true.
+5. Then check if r1 is null and r2 is not null or r1 is not null or r2 is null then return false.
+6. Then check if value of r1 and r2 is equal then return false.
+7. Return helper(r1.left,r2.right) && helper(r1.right,r2.left).
