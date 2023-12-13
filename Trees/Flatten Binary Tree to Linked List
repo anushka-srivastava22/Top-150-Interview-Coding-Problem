@@ -1,0 +1,52 @@
+Problem Statement
+https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
+Given the root of a binary tree, flatten the tree into a "linked list":
+
+The "linked list" should use the same TreeNode class where the right child pointer points to the next node in the list and the left child pointer is always null.
+The "linked list" should be in the same order as a pre-order traversal of the binary tree.
+
+
+Solution
+
+class Solution {
+    public void flatten(TreeNode root) {
+        if(root == null)
+        {
+            return;
+        }
+        Stack<TreeNode> stack=new Stack<>();
+        while(true)
+        {
+            if(root.right!=null)
+            {
+                stack.push(root.right);
+            }
+            if(root.left == null)
+            {
+                if(stack.isEmpty())
+                {
+                    break;
+                }
+                root.right = stack.pop();
+            }
+            else
+            {
+                root.right = root.left;
+                root.left = null;
+            }
+            root = root.right;
+        }
+        return;
+    }
+}
+
+Algorithm
+
+1. Check if root is null then return.
+2. Create a stack of TreeNode type.
+3. Run while(true) loop.
+4. Check if value of root.right is not null then push the value of root.right in stack.
+5. Check if value of root.left is null then check if stack is empty, break it and then pop the value of stack to root.right.
+6. Otherwise assign the value of root.left to root.right and null to root.left.
+7. Assign the value of root.right to root.
+8. Return.
