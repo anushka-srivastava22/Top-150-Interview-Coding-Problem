@@ -1,0 +1,38 @@
+Problem Statement
+https://leetcode.com/problems/path-sum/
+Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.
+
+A leaf is a node with no children.
+
+
+Solution
+
+class Solution {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if(root == null)
+        {
+            return false;
+        }
+        if(root.left == null && root.right == null)
+        {
+            if(targetSum == root.val)
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
+        }
+        int requiredSum = targetSum - root.val;
+        return hasPathSum(root.left, requiredSum) || hasPathSum(root.right, requiredSum);
+    }
+}
+
+
+Algorithm 
+
+1. Check if root is null then return false.
+2. Check if value of root.left is null and value of root.right is null then check if targetSum is equal to root.val then return true otherwise return false.
+3. Store the subtracted sum of root.val and targetsum in requiredSum.
+4. Return hasPathSum(root.left, requiredSum) || hasPathSum(root.right, requiredSum).
