@@ -1,0 +1,36 @@
+Probem Statement
+
+https://leetcode.com/problems/binary-tree-right-side-view/
+Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+
+
+Solution
+
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        rightSideViewHelper(root,res,0);
+        return res;
+    }
+    public void rightSideViewHelper(TreeNode root, List<Integer> res, int lvl)
+    {
+        if(root==null)
+        {
+            return;
+        }
+        else if(lvl == res.size())
+        {
+            res.add(root.val);
+        }
+        rightSideViewHelper(root.right,res,lvl+1);
+        rightSideViewHelper(root.left,res,lvl+1);
+    }
+}
+
+
+Algorithm 
+
+1. Create a List of Integer Type as res, Call the helper function and return res.
+2. Declare the helper function with root of TreeNode type, res of List with Integers type and lvl with 0 of int type and Check if root is null then return.
+3. Then check if lvl is equal to size of res then add value of root to res.
+4. Call rightSideViewHelper(root.right,res,lvl+1) and rightSideViewHelper(root.left,res,lvl+1).
