@@ -1,0 +1,54 @@
+Problem Statement
+
+https://leetcode.com/problems/average-of-levels-in-binary-tree/
+
+Given the root of a binary tree, return the average value of the nodes on each level in the form of an array. Answers within 10-5 of the actual answer will be accepted.
+
+
+Solution 
+
+class Solution {
+    public List<Double> averageOfLevels(TreeNode root) {
+        LinkedList<Double> res = new LinkedList<>();
+        Queue<TreeNode> q=new LinkedList<>();
+        if(root == null)
+        {
+            return res;
+        }
+        q.add(root);
+        while(!q.isEmpty())
+        {
+            int n = q.size();
+            double sum = 0.0;
+            for(int i=0; i<n;i++)
+            {
+                TreeNode node = q.poll();
+                sum += node.val;
+                if(node.left!=null)
+                {
+                    q.offer(node.left);
+
+                }
+                if(node.right != null)
+                {
+                    q.offer(node.right);
+                }
+
+            }
+            res.add(sum/n);
+        }
+        return res;
+    }
+}
+
+
+Algorithm 
+
+1. Declare LinkedList<Double> res = new LinkedList<>() and Queue<TreeNode> q=new LinkedList<>().
+2. Check if root is null return res.
+3. Add the value of node to q and declare sum as 0.0.
+4. Run for loop from i=0 till n and then store q.poll to node.
+5. Add the value of node to sum.
+6. Check if value of left of node is not equal to null  then offer it to q.
+7. Check if value of right of node is not equal to null  then offer it to q.
+8. Add avg sum/n to res then return res at last.
