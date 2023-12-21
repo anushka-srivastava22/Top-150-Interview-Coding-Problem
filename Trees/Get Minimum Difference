@@ -1,0 +1,31 @@
+Problem Statement
+
+https://leetcode.com/problems/minimum-absolute-difference-in-bst/
+
+Given the root of a Binary Search Tree (BST), return the minimum absolute difference between the values of any two different nodes in the tree.
+
+
+Solution
+
+class Solution {
+    int min = Integer.MAX_VALUE;
+        Integer prevalue = null;
+    public int getMinimumDifference(TreeNode root) {
+        
+        if(root == null)
+        {
+            return min;
+        }
+        getMinimumDifference(root.left);
+
+        if(prevalue != null)
+        {
+            min = Math.min(min,root.val-prevalue);
+        }
+        prevalue = root.val;
+        return getMinimumDifference(root.right);
+
+
+    }
+}
+
