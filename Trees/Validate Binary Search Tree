@@ -1,0 +1,45 @@
+Problem Statement
+
+https://leetcode.com/problems/validate-binary-search-tree/
+
+Given the root of a binary tree, determine if it is a valid binary search tree (BST).
+
+A valid BST is defined as follows:
+
+The left 
+subtree
+ of a node contains only nodes with keys less than the node's key.
+The right subtree of a node contains only nodes with keys greater than the node's key.
+Both the left and right subtrees must also be binary search trees.
+
+
+Solution 
+
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return isValid(root,Long.MIN_VALUE,Long.MAX_VALUE);
+    }
+    public boolean isValid(TreeNode root, long left, long right)
+    {
+        if(root == null)
+        {
+            return true;
+        }
+        long val = (long)root.val;
+        if(val >= left && val <= right)
+        {
+            return isValid(root.left,left,val-1) && isValid(root.right,val+1,right);
+        }
+        return false;
+    }
+}
+
+
+Algorithm
+
+1. Return return isValid(root,Long.MIN_VALUE,Long.MAX_VALUE).
+2. Create a funtion isValid(TreeNode root, long left, long right) with boolean return type.
+3. Check if root is null then return true.
+4. Convert the value of root to long and store it in val.
+5.Check if val is greater than or equal to val and less than or equal to right then return isValid(root.left,left,val-1) and isValid(root.right,val+1,right).
+6. Return false.
