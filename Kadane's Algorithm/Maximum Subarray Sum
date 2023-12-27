@@ -1,0 +1,39 @@
+Problem Statement
+
+https://leetcode.com/problems/maximum-subarray/
+
+Given an integer array nums, find the subarray with the largest sum, and return its sum.
+
+
+Solution
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int n = nums.length;
+        int sum = 0;
+        int maxsum = Integer.MIN_VALUE;
+        for(int i=0;i<n;i++)
+        {
+            sum = sum + nums[i];
+            if(sum>maxsum)
+            {
+                maxsum=sum;
+            }
+            if(sum<0)
+            {
+                sum = 0;
+            }   
+        }
+        return maxsum;
+    }
+}
+
+
+Algorithm
+
+1. Assign n = nums.length, sum = 0 & maxsum = Integer.MIN_VALUE.
+2. Run for loop from i=0 till n.
+3. Assign the added value of nums[i] to sum.
+4. Check if sum is greater than maxsum then assign sum to maxsum.
+5. Check if sum<0 then assign sum=0.
+6. Return maxsum.
