@@ -38,3 +38,18 @@ class Solution {
         dfs(grid,i,j+1,island,newIsland);
     }
 }
+
+
+Algorithm
+
+1. Run for loop from i=0 till length of grid then run for loop from j=0 till length.
+2. Check if grid[i][j] is 1 then call dfs function with value of grid,i,j,1,0 and increase value of count.4
+3. Return count.
+4. Declare dfs function with grid,i,j,island,newIsland.
+5. Check if i<0||j<0||i>=grid.length||j>=grid[0].length||grid[i][j]!=island then return.
+6. Assign 0 to grid[i][j].
+7. Call the functions as follows :
+        dfs(grid,i-1,j,island,newIsland);
+        dfs(grid,i+1,j,island,newIsland);
+        dfs(grid,i,j-1,island,newIsland);
+        dfs(grid,i,j+1,island,newIsland);
