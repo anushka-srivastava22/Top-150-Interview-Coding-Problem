@@ -1,0 +1,54 @@
+Problem Statement
+
+https://leetcode.com/problems/course-schedule/
+
+There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
+
+For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
+Return true if you can finish all courses. Otherwise, return false.
+
+
+Solution
+
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        ArrayList<Integer>[] adj = new ArrayList<Integer>();
+        for(int i=0;<numCourses;i++)
+        {
+            adj[i] = new ArrayList<Integer>();
+        } 
+        int edges = prerequisites.length;
+        for(int i=0;i<edges;i++)
+        {
+            adj[prerequisites[i][0]].add(prerequisites[i][1]);
+        }
+        boolean vis[] = new boolean[numCourses];
+        HashSet<Integer> h=new HashSet<Integer>();
+        for(int i=0;i<numCourses;i++)
+        {
+            if(!vis[i])
+            {
+                boolean res = dfs(adj,i,h,vis);
+                if(res)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    private boolean dfs(ArrayList<Integer>[] adj, int start, HashSet<Integer> h, boolean[] vis){
+        vis[start] = true;
+        h.add(start);
+        for(Integer i : adj[start]){
+            if(!vis[i]){
+                dfs(adj, i, h, vis);   
+            }
+            if(h.contains(i)){
+                return true;
+            }
+        }
+        h.remove(start);
+        return false;
+    }
+}
