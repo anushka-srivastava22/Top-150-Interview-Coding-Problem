@@ -12,32 +12,28 @@ Solution
 
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        ArrayList<Integer>[] adj = new ArrayList<Integer>();
-        for(int i=0;<numCourses;i++)
-        {
+        ArrayList<Integer>[] adj = new ArrayList[numCourses];
+        for(int i=0;i<numCourses;i++){
             adj[i] = new ArrayList<Integer>();
-        } 
+        }
         int edges = prerequisites.length;
-        for(int i=0;i<edges;i++)
-        {
+        for(int i=0;i<edges;i++){
             adj[prerequisites[i][0]].add(prerequisites[i][1]);
         }
-        boolean vis[] = new boolean[numCourses];
-        HashSet<Integer> h=new HashSet<Integer>();
-        for(int i=0;i<numCourses;i++)
-        {
-            if(!vis[i])
-            {
-                boolean res = dfs(adj,i,h,vis);
-                if(res)
-                {
+        boolean[] vis = new boolean[numCourses];
+        HashSet<Integer> h = new HashSet<Integer>();
+
+        for(int i=0;i<numCourses;i++){
+            if(!vis[i]){
+                boolean res = dfs(adj, i, h, vis);
+                if(res){
                     return false;
                 }
             }
         }
         return true;
     }
-    private boolean dfs(ArrayList<Integer>[] adj, int start, HashSet<Integer> h, boolean[] vis){
+        private boolean dfs(ArrayList<Integer>[] adj, int start, HashSet<Integer> h, boolean[] vis){
         vis[start] = true;
         h.add(start);
         for(Integer i : adj[start]){
