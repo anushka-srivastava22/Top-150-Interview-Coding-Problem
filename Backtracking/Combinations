@@ -1,0 +1,38 @@
+Problem Statement
+
+https://leetcode.com/problems/combinations/
+
+Given two integers n and k, return all possible combinations of k numbers chosen from the range [1, n].
+
+You may return the answer in any order.
+
+
+class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> cur = new ArrayList<>();
+        
+        findCombinations(n,k,1,cur,res);
+        return res;
+    }
+    public void findCombinations(int n, int k, int index, List<Integer> cur, List<List<Integer>> res)
+    {
+        if(k==0)
+        {
+            res.add(new ArrayList(cur));
+            return;
+        }
+        for(int i=index;i<=n;i++)
+        {
+            if(cur.contains(i))
+            {
+                continue;
+            }
+            cur.add(i);
+            findCombinations(n,k-1,i+1,cur,res);
+            cur.remove(cur.size()-1);
+            
+        }
+    }
+}
